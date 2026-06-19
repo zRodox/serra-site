@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Serra ❤️</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pink: #ff69b4;
+      --purple: #c026d3;
+      --rose: #f43f5e;
+      --accent: #ff1493;
+      --bg-start: #ffe4e1;
+      --bg-end: #f0e6ff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 100%);
+      color: #333;
+      line-height: 1.7;
+      overflow-x: hidden;
+      min-height: 100vh;
+      transition: background 0.8s ease;
+    }
+
+    .hearts { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; overflow: hidden; }
+    .heart {
+      position: absolute;
+      font-size: 1.8rem;
+      color: var(--accent);
+      opacity: 0.9;
+      animation: fall linear infinite;
+      text-shadow: 0 0 10px rgba(255,20,147,0.6);
+    }
+    @keyframes fall { to { transform: translateY(105vh) rotate(720deg); } }
+
+    header { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; position: relative; z-index: 2; padding: 20px; }
+    h1 { font-family: 'Dancing Script', cursive; font-size: clamp(2.8rem, 8vw, 5rem); color: var(--rose); text-shadow: 0 8px 25px rgba(192,38,211,0.5); }
+    .date { font-size: clamp(1.2rem, 4vw, 1.7rem); color: #5f0a87; font-weight: 600; margin-top: 15px; }
+
+    section { padding: 60px 20px; max-width: 900px; margin: 0 auto; position: relative; z-index: 2; }
+
+    .card {
+      background: white;
+      border-radius: 25px;
+      padding: 35px 25px;
+      margin: 20px auto;
+      box-shadow: 0 15px 35px rgba(192,38,211,0.18);
+      text-align: center;
+    }
+
+    h2 { font-family: 'Dancing Script', cursive; font-size: clamp(2.4rem, 6vw, 3.3rem); color: var(--purple); margin-bottom: 25px; }
+    .love-text { font-size: clamp(1.1rem, 3.5vw, 1.35rem); line-height: 1.9; font-style: italic; color: #4c1d95; }
+    .days { font-size: 3rem; font-weight: bold; color: var(--rose); margin: 10px 0; }
+
+    .kiss { font-size: 5rem; cursor: pointer; transition: transform 0.4s; display: inline-block; }
+    .kiss:active { transform: scale(2.2) rotate(20deg); }
+
+    textarea {
+      width: 100%;
+      min-height: 180px;
+      padding: 15px;
+      border: 2px solid #fce7f3;
+      border-radius: 15px;
+      font-size: 1.1rem;
+      resize: vertical;
+    }
+
+    .theme-btn {
+      padding: 12px 18px;
+      margin: 5px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 1rem;
+      color: white;
+    }
+
+    .music-btn {
+      position: fixed;
+      bottom: 20px; right: 20px;
+      z-index: 100;
+      background: rgba(244, 63, 94, 0.95);
+      color: white;
+      border: none;
+      width: 60px; height: 60px;
+      border-radius: 50%;
+      font-size: 1.8rem;
+      box-shadow: 0 10px 25px rgba(244,63,94,0.4);
+    }
+
+    footer {
+      text-align: center;
+      padding: 45px 20px;
+      background: linear-gradient(to top, #831843, #db2777);
+      color: white;
+      z-index: 2;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="hearts" id="hearts"></div>
+
+  <audio id="bgMusic" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  </audio>
+
+  <button class="music-btn" id="musicBtn">🎵</button>
+
+  <header>
+    <div>
+      <h1>Serra ❤️</h1>
+      <p class="date">6 Mart 2026'den beri kalbimin sahibi</p>
+    </div>
+  </header>
+
+  <section>
+    <div class="card">
+      <h2>Birlikte Geçen Günlerimiz</h2>
+      <p class="love-text">Tanışalı</p>
+      <div class="days" id="daysCount">---</div>
+      <p style="font-size:1.2rem;">gün geçti ve her gün seni daha çok seviyorum ❤️</p>
+    </div>
+  </section>
+
+  <section style="background:#fdf4ff;">
+    <div class="card">
+      <h2>Beni Seviyor musun?</h2>
+      <p class="question">Beni seviyor musun? 💕</p>
+      <div style="margin-top:30px;">
+        <button onclick="yesClicked()" style="padding:18px 45px; font-size:1.35rem; background:linear-gradient(45deg,#22c55e,#86efac); color:white; border:none; border-radius:50px;">EVET ❤️</button>
+        <button id="noBtn" style="padding:18px 45px; font-size:1.35rem; background:linear-gradient(45deg,#ef4444,#f87171); color:white; border:none; border-radius:50px;">HAYIR</button>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="card">
+      <h2>Sana Öpücük Gönder 💋</h2>
+      <p onclick="sendKiss()" class="kiss">💋</p>
+      <p style="font-size:1.2rem; margin-top:10px;">Tıkla ve ona bir öpücük gönder!</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="card">
+      <h2>Not Defterim</h2>
+      <textarea id="serraNote" placeholder="Buraya hislerini, özlemlerini, ne kadar çok sevdiğini yaz..."></textarea>
+      <br><br>
+      <button onclick="saveNote()" style="padding:12px 25px; margin-right:10px;">Kaydet 💾</button>
+      <button onclick="copyNote()" style="padding:12px 25px;">Notu Kopyala 📋</button>
+      <p style="font-size:0.9rem; margin-top:12px; color:#666;">Notunu kaydedip kopyalayabilirsin, sonra bana gönderebilirsin.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="card">
+      <h2>Tema Değiştir</h2>
+      <div>
+        <button class="theme-btn" style="background:#ff69b4" onclick="changeTheme(0)">Pembe</button>
+        <button class="theme-btn" style="background:#c026d3" onclick="changeTheme(1)">Mor</button>
+        <button class="theme-btn" style="background:#f43f5e" onclick="changeTheme(2)">Kırmızı</button>
+        <button class="theme-btn" style="background:#7e22ce" onclick="changeTheme(3)">Lavanta</button>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="card">
+      <h2>Sana Özel Mektubum</h2>
+      <p class="love-text" style="text-align:left; max-width:700px; margin:0 auto;">
+        Canım Serram,<br><br> Aramızdaki kilometreler ne kadar çok olursa olsun, seni her gün daha fazla özlüyorum. Sabah uyandığımda ilk aklıma gelen sensin, gece yatmadan önce son düşündüğüm yine sensin.<br><br> Bu mesafe bizi zorlasa da kalbim seninle her zaman yan yana. Bir gün aynı şehirde, aynı evde uyanacağımız günü iple çekiyorum.<br><br> Sen benim en güzel hayalim, en tatlı gerçeğimsin. Uzak olsak da aşkımız yakın, çok yakın.<br><br> Seni çok seviyorum,<br> Sonsuza kadar seninle...<br><br> ❤️
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <p>Serra'ya sonsuz sevgiyle • 2026</p>
+    <p>Şimdi gel öp beni 😘</p>
+  </footer>
+
+  <script>
+    // Kalp Yağmuru
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.innerHTML = ['❤️','💖','💗','💘','💝'][Math.floor(Math.random()*5)];
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = Math.random() * 3.5 + 4.5 + 's';
+      heart.style.fontSize = Math.random() * 1.2 + 1.6 + 'rem';
+      document.getElementById('hearts').appendChild(heart);
+      setTimeout(() => heart.remove(), 10000);
+    }
+    setInterval(createHeart, 180);
+    for (let i = 0; i < 15; i++) setTimeout(createHeart, i * 100);
+
+    // Gün Sayacı
+    function calculateDays() {
+      const start = new Date('2026-03-06');
+      const today = new Date();
+      const diff = Math.ceil((today - start) / (1000 * 60 * 60 * 24));
+      document.getElementById('daysCount').textContent = diff;
+    }
+    calculateDays();
+
+    // Sanal Öpücük
+    function sendKiss() {
+      const kiss = document.createElement('div');
+      kiss.style.position = 'fixed'; kiss.style.fontSize = '6rem';
+      kiss.style.left = '50%'; kiss.style.top = '40%';
+      kiss.style.transform = 'translate(-50%, -50%)';
+      kiss.style.zIndex = '200'; kiss.style.transition = 'all 1.2s';
+      kiss.textContent = '💋';
+      document.body.appendChild(kiss);
+
+      setTimeout(() => {
+        kiss.style.transform = 'translate(-50%, -180%) scale(0.6)';
+        kiss.style.opacity = '0';
+      }, 150);
+      setTimeout(() => kiss.remove(), 1600);
+
+      for (let i = 0; i < 40; i++) setTimeout(createHeart, i * 25);
+      alert("Öpücüğünü aldım! 💋❤️");
+    }
+
+    // Not Defteri
+    const noteArea = document.getElementById('serraNote');
+    noteArea.value = localStorage.getItem('serraNote') || '';
+
+    function saveNote() {
+      localStorage.setItem('serraNote', noteArea.value);
+      alert("Notun kaydedildi ❤️");
+    }
+
+    function copyNote() {
+      if (noteArea.value.trim() === "") {
+        alert("Önce bir not yaz lütfen ❤️");
+        return;
+      }
+      navigator.clipboard.writeText(noteArea.value);
+      alert("Not kopyalandı! Bana yapıştırıp gönderebilirsin 📋");
+    }
+
+    // Tema Değiştirme (Arka plan + renkler)
+    function changeTheme(n) {
+      const themes = [
+        { rose: "#f43f5e", purple: "#c026d3", accent: "#ff1493", start: "#ffe4e1", end: "#fce7f3" },   // Pembe
+        { rose: "#c026d3", purple: "#7e22ce", accent: "#a855f7", start: "#f3e8ff", end: "#e0e7ff" },   // Mor
+        { rose: "#e11d48", purple: "#9f1239", accent: "#f43f5e", start: "#ffe4e6", end: "#fecaca" },   // Kırmızı
+        { rose: "#7e22ce", purple: "#6b21a8", accent: "#c084fc", start: "#f3e8ff", end: "#e0bbff" }    // Lavanta
+      ];
+
+      const t = themes[n];
+      document.documentElement.style.setProperty('--rose', t.rose);
+      document.documentElement.style.setProperty('--purple', t.purple);
+      document.documentElement.style.setProperty('--accent', t.accent);
+      document.documentElement.style.setProperty('--bg-start', t.start);
+      document.documentElement.style.setProperty('--bg-end', t.end);
+    }
+
+    // Müzik
+    const music = document.getElementById('bgMusic');
+    const musicBtn = document.getElementById('musicBtn');
+    let isPlaying = false;
+    musicBtn.addEventListener('click', () => {
+      if (isPlaying) { music.pause(); musicBtn.textContent = '🎵'; }
+      else { music.play().catch(()=>{}); musicBtn.textContent = '⏸️'; }
+      isPlaying = !isPlaying;
+    });
+
+    // EVET / HAYIR
+    function yesClicked() {
+      alert("Ben de seni çok seviyorum Aşkıııııımmmm ❤️❤️❤️");
+      for (let i = 0; i < 60; i++) setTimeout(createHeart, i * 20);
+    }
+
+    const noBtn = document.getElementById('noBtn');
+    function moveNoButton() {
+      const maxX = window.innerWidth - 170;
+      const maxY = window.innerHeight - 110;
+      noBtn.style.position = 'absolute';
+      noBtn.style.left = Math.random() * maxX + 'px';
+      noBtn.style.top = Math.random() * maxY + 'px';
+    }
+    noBtn.addEventListener('touchstart', moveNoButton);
+    noBtn.addEventListener('mouseover', moveNoButton);
+    noBtn.addEventListener('click', () => {
+      alert("Kaçsan da yakalarım seni Serra 😏❤️");
+      noBtn.style.display = 'none';
+    });
+  </script>
+</body>
+</html>
